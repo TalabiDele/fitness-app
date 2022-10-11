@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
         const docRef = await setDoc(ref, { name, country, state })
           .then((re) => {
             console.log(re);
+            console.log(docRef);
           })
           .catch((e) => {
             console.log(e.message);
