@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { logout, useAuth, db } from "../firebase";
+import React, { useContext, useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
@@ -9,6 +8,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import Instructors from "../Instructors/Instructors";
 import userImg from "../imgs/user.png";
+import { Context } from "../Context";
 
 // import {} from "tailwindcss";
 
@@ -68,6 +68,8 @@ const Tasks = () => {
       completed: false,
     },
   ]);
+
+  const { logout, useAuth, db } = useContext(Context);
 
   // Initialize user
   const currentUser = useAuth();

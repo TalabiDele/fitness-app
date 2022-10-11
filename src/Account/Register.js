@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
-import { signup, useAuth, loading, error, emailError } from "../firebase";
+// import { signup, useAuth, loading, error, emailError } from "../Context";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Container } from "./Style";
-import AuthContext from "../AuthContext";
+import { Context, useAuth } from "../Context";
 
 const Register = () => {
   const [countries, setCountries] = useState([]);
@@ -15,9 +15,9 @@ const Register = () => {
   const [state, setState] = useState("");
   const [isError, setIsError] = useState("");
 
-  const currentUser = useAuth();
+  const { error, setError, signup, loading } = useContext(Context);
 
-  // const { error, setError } = useContext(AuthContext);
+  const currentUser = useAuth();
 
   useEffect(() => {
     getCountries();
@@ -74,9 +74,6 @@ const Register = () => {
     <Container>
       <h1>Welcome to Fitness App</h1>
       <form action="" onSubmit={handleSignup}>
-        <p className="error">{isError || emailError}</p>
-        {emailError && <p className="error">Email already in use</p>}
-        {/* <p className="error">{emailError}</p> */}
         <p className="error">{error}</p>
         {currentUser && (
           <p>

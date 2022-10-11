@@ -1,5 +1,4 @@
 import Signup from "./Account/Register";
-import { useAuth } from "./firebase";
 import {
   BrowserRouter as Router,
   Route,
@@ -8,6 +7,8 @@ import {
 } from "react-router-dom";
 import Signin from "./Signin";
 import Dashboard from "./Dashboard";
+import { useAuth } from "./Context";
+import { useContext } from "react";
 
 function App() {
   const currentUser = useAuth();

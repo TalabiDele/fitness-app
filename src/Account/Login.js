@@ -1,15 +1,13 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { login } from "../firebase";
 import { Container } from "./Style";
-import AuthContext from "../AuthContext";
+import { Context } from "../Context";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isError, setIsError] = useState("");
 
-  const { error } = useContext(AuthContext);
+  const { error, login, loading } = useContext(Context);
 
   // Login User
   const handleLogin = async (e) => {
@@ -49,7 +47,13 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button>Login</button>
+        {loading ? (
+          <button disabled className="disable">
+            Sign up
+          </button>
+        ) : (
+          <button>Sign in</button>
+        )}
       </form>
       <p>
         Don't have an account? <Link to="/signup">Sign up</Link>
