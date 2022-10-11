@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { Link } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { Wrapper, Container } from "./Style";
+import { Container } from "./Style";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { BsFillCheckCircleFill } from "react-icons/bs";
 import Instructors from "../Instructors/Instructors";
@@ -76,7 +75,7 @@ const Tasks = () => {
 
   useEffect(() => {
     getDetails();
-  }, []);
+  });
 
   //   Get details of logged in user
   const getDetails = async () => {

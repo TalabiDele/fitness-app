@@ -8,7 +8,6 @@ import {
 import Signin from "./Signin";
 import Dashboard from "./Dashboard";
 import { useAuth } from "./Context";
-import { useContext } from "react";
 
 function App() {
   const currentUser = useAuth();

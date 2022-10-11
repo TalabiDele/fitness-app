@@ -1,23 +1,7 @@
 import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import "firebase/firestore";
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDocs,
-  addDoc,
-  serverTimestamp,
-  collection,
-} from "firebase/firestore";
-import { getDatabase } from "firebase/database";
-import AuthContext from "./AuthContext";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCDZ0kT5Z5UfayfwrNWul9G9O_09sxhB_M",

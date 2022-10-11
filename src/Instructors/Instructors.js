@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container, Wrapper } from "./Style";
+import { Container } from "./Style";
 import donnie from "../imgs/Donnie.jpg";
 import ben from "../imgs/Benjamin.png";
 import jen from "../imgs/Jenny.png";

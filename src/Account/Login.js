@@ -12,15 +12,6 @@ const Login = () => {
   // Login User
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    // if (email === "" || password === "") {
-    //   setIsError("Fill all fields..");
-
-    //   setTimeout(() => {
-    //     setIsError("");
-    //   }, 4000);
-    // }
-
     await login(email, password);
   };
 

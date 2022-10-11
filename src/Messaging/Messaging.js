@@ -1,20 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
-import { Container, Wrapper } from "./Style";
+import { Container } from "./Style";
 import { RiSendPlaneFill } from "react-icons/ri";
-import { ref, onValue, set, getDatabase, child, get } from "firebase/database";
+import { ref, set, getDatabase, child, get } from "firebase/database";
 import { Context } from "../Context";
-
-//import uuid v4
-import { v4 as uuid } from "uuid";
 
 const Messaging = ({ isInstructor }) => {
   const [text, setText] = useState("");
   const [messages, setMessages] = useState([]);
 
-  const { db, useAuth, app } = useContext(Context);
+  const { useAuth, app } = useContext(Context);
 
-  const unique_id = uuid();
-  const small_id = unique_id.slice(0, 8);
+  //   const unique_id = uuid();
+  //   const small_id = unique_id.slice(0, 8);
 
   const data = getDatabase(app);
 

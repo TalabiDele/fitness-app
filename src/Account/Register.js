@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-// import { signup, useAuth, loading, error, emailError } from "../Context";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Container } from "./Style";
@@ -13,9 +12,8 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
-  const [isError, setIsError] = useState("");
 
-  const { error, setError, signup, loading } = useContext(Context);
+  const { error, signup, loading } = useContext(Context);
 
   const currentUser = useAuth();
 
@@ -54,14 +52,6 @@ const Register = () => {
     e.preventDefault();
     console.log(country);
     console.log(state);
-
-    if (password === "" || country === "" || state === "") {
-      setIsError("Fill all fields..");
-
-      setTimeout(() => {
-        setIsError("");
-      }, 4000);
-    }
 
     await signup(email, password, name, country, state);
 
