@@ -34,6 +34,9 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 export const db = getFirestore(app);
+export let error = false;
+export let loading = false;
+export let emailError = "";
 
 export const startFirebase = () => {
   return getDatabase(app);
@@ -41,11 +44,10 @@ export const startFirebase = () => {
 
 // Register User
 export const signup = async (email, password, name, country, state) => {
+  loading = true;
+
   return createUserWithEmailAndPassword(auth, email, password)
     .then(async (result) => {
-      const { loading, setLoading } = useContext(AuthContext);
-      setLoading(true);
-
       const ref = doc(db, "users", result.user.uid);
       const docRef = await setDoc(ref, { name, country, state })
         .then((re) => {
@@ -54,25 +56,42 @@ export const signup = async (email, password, name, country, state) => {
         .catch((e) => {
           console.log(e.message);
         });
-
-      setLoading(false);
+      loading = false;
     })
     .catch((isError) => {
-      const { error, setError, loading, setLoading } = useContext(AuthContext);
-      setLoading(true);
-      if (error.code === "auth/email-already-in-use") {
-        setError("Email already in use");
-      } else {
-        setError(isError.message);
-      }
+      if (isError.code === "auth/email-already-in-use") {
+        emailError = true;
 
-      setLoading(false);
+        console.log(emailError);
+
+        setTimeout(() => {
+          emailError = false;
+        }, 4000);
+      } else {
+        error = isError.message;
+
+        setTimeout(() => {
+          error = "";
+        }, 4000);
+      }
+      loading = false;
     });
 };
 
 // Login User
 export const login = async (email, password) => {
-  return signInWithEmailAndPassword(auth, email, password);
+  return signInWithEmailAndPassword(auth, email, password)
+    .then((e) => {
+      console.log(e);
+    })
+    .catch((e) => {
+      error = e.message;
+      console.log(error);
+
+      setTimeout(() => {
+        error = "";
+      }, 4000);
+    });
 };
 
 // Logout user

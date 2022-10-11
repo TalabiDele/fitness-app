@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { signup, useAuth } from "../firebase";
+import { signup, useAuth, loading, error, emailError } from "../firebase";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Container } from "./Style";
@@ -13,10 +13,11 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [country, setCountry] = useState("");
   const [state, setState] = useState("");
+  const [isError, setIsError] = useState("");
 
   const currentUser = useAuth();
 
-  const { error, setError, loading, setLoading } = useContext(AuthContext);
+  // const { error, setError } = useContext(AuthContext);
 
   useEffect(() => {
     getCountries();
@@ -54,11 +55,11 @@ const Register = () => {
     console.log(country);
     console.log(state);
 
-    if (email === "" || password === "" || country === "" || state === "") {
-      setError("Fill all fields..");
+    if (password === "" || country === "" || state === "") {
+      setIsError("Fill all fields..");
 
       setTimeout(() => {
-        setError("");
+        setIsError("");
       }, 4000);
     }
 
@@ -73,6 +74,9 @@ const Register = () => {
     <Container>
       <h1>Welcome to Fitness App</h1>
       <form action="" onSubmit={handleSignup}>
+        <p className="error">{isError || emailError}</p>
+        {emailError && <p className="error">Email already in use</p>}
+        {/* <p className="error">{emailError}</p> */}
         <p className="error">{error}</p>
         {currentUser && (
           <p>

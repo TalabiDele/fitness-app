@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { login } from "../firebase";
 import { Container } from "./Style";
+import AuthContext from "../AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [isError, setIsError] = useState("");
+
+  const { error } = useContext(AuthContext);
 
   // Login User
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    if (email === "" || password === "") {
-      setError("Fill all fields..");
+    // if (email === "" || password === "") {
+    //   setIsError("Fill all fields..");
 
-      setTimeout(() => {
-        setError("");
-      }, 4000);
-    }
+    //   setTimeout(() => {
+    //     setIsError("");
+    //   }, 4000);
+    // }
 
     await login(email, password);
   };
@@ -26,6 +29,7 @@ const Login = () => {
   return (
     <Container>
       <h1>Sign in to Fitness App</h1>
+      <p className="error">{error}</p>
       <form action="" onSubmit={handleLogin}>
         <label htmlFor="email">Email</label>
         <input
