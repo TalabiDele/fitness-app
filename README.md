@@ -2,7 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Live Site
+## Live Project
+
+Run code by clicking the url below
 
 https://fitty-app.netlify.app
 
